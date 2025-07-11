@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-lang-key="title">Xlerion's Total Darkness: Infografía Interactiva</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #0d0d0d;
+            color: #f0f0f0;
+        }
+        .font-orbitron {
+            font-family: 'Orbitron', sans-serif;
+        }
+        .text-glow-cyan {
+            text-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff, 0 0 15px #00ffff;
+        }
+        .text-glow-magenta {
+            text-shadow: 0 0 5px #ff00ff, 0 0 10px #ff00ff, 0 0 15px #ff00ff;
+        }
+        .card {
+            background-color: rgba(10, 10, 20, 0.8);
+            border: 1px solid #ff00ff;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        .flowchart-item {
+            border: 2px solid #00ffff;
+            background-color: rgba(0, 255, 255, 0.1);
+            position: relative;
+        }
+        .flowchart-arrow {
+            color: #00ffff;
+            font-size: 2rem;
+            line-height: 1;
+        }
+        .timeline {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            background-color: #ff00ff;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -3px;
+            box-shadow: 0 0 10px #ff00ff;
+        }
+        .timeline-container {
+            padding: 10px 40px;
+            position: relative;
+            background-color: inherit;
+            width: 50%;
+        }
+        .timeline-container::after {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            right: -17px;
+            background-color: #0d0d0d;
+            border: 4px solid #00ffff;
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+            box-shadow: 0 0 10px #00ffff;
+        }
+        .left {
+            left: 0;
+        }
+        .right {
+            left: 50%;
+        }
+        .right::after {
+            left: -16px;
+        }
+        .timeline-content {
+            padding: 20px 30px;
+            background-color: rgba(10, 10, 20, 0.8);
+            border: 1px solid #00ffff;
+            position: relative;
+            border-radius: 6px;
+        }
+        .platform-icon {
+            font-size: 3rem;
+            line-height: 1;
+            display: inline-block;
+            margin: 0 1rem;
+            color: #00ffff;
+            text-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff;
+        }
+        @media screen and (max-width: 768px) {
+            .timeline::after {
+                left: 31px;
+            }
+            .timeline-container {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+            .timeline-container::before {
+                left: 60px;
+                border: medium solid white;
+                border-width: 10px 10px 10px 0;
+                border-color: transparent white transparent transparent;
+            }
+            .left::after, .right::after {
+                left: 15px;
+            }
+            .right {
+                left: 0%;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-200">
+    <main class="container mx-auto px-4 py-8">
+        <div class="absolute top-4 right-4 z-10">
+            <select id="language-switcher" class="bg-gray-800 text-white p-2 rounded-md border border-magenta-500">
+                <option value="es">Español</option>
+                <option value="en">English</option>
+            </select>
+        </div>
+
+        <header class="text-center mb-16">
+            <h1 class="text-5xl md:text-7xl font-orbitron font-bold text-glow-magenta mb-4" data-lang-key="title">Xlerion's Total Darkness</h1>
+            <p class="text-xl md:text-2xl text-cyan-400" data-lang-key="subtitle">Una Infografía de la Narrativa Interactiva</p>
+        </header>
+
+        <section id="premise" class="mb-20">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-orbitron text-glow-cyan mb-2" data-lang-key="premiseTitle">La Última Esperanza de la Humanidad</h2>
+                <p class="max-w-3xl mx-auto text-lg text-gray-400" data-lang-key="premiseText">En un futuro devastado, una Inteligencia Suprema ha juzgado a la humanidad como una plaga. Dos almas deben viajar en el tiempo para corregir un pecado ancestral y salvar su especie de la aniquilación total.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                <div class="card p-6 rounded-lg">
+                    <p class="text-6xl font-orbitron font-bold text-yellow-400">2</p>
+                    <p class="text-xl text-gray-300 mt-2" data-lang-key="survivors">Supervivientes</p>
+                </div>
+                <div class="card p-6 rounded-lg">
+                    <p class="text-6xl font-orbitron font-bold text-yellow-400">1</p>
+                    <p class="text-xl text-gray-300 mt-2" data-lang-key="desperateMission">Misión Desesperada</p>
+                </div>
+                <div class="card p-6 rounded-lg">
+                    <p class="text-6xl font-orbitron font-bold text-yellow-400">∞</p>
+                    <p class="text-xl text-gray-300 mt-2" data-lang-key="universesAtStake">Universos en Juego</p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="lore" class="mb-20">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-orbitron text-glow-cyan mb-2" data-lang-key="loreTitle">Un Universo de Pecados Olvidados</h2>
+                <p class="max-w-3xl mx-auto text-lg text-gray-400" data-lang-key="loreText">La historia no comenzó con Xlerion. Su juicio es el eco de una tragedia cósmica que se remonta al origen de la vida y a la introducción de la "necesidad" en el universo.</p>
+            </div>
+
+            <div class="timeline">
+                <div class="timeline-container left">
+                    <div class="timeline-content">
+                        <h3 class="text-2xl font-orbitron text-magenta-500" data-lang-key="plague">La Plaga Parasitaria</h3>
+                        <p data-lang-key="plagueDesc">Una raza primordial basada en la codicia corrompe innumerables mundos, creando un sistema que drena la vida del universo.</p>
+                    </div>
+                </div>
+                <div class="timeline-container right">
+                    <div class="timeline-content">
+                        <h3 class="text-2xl font-orbitron text-magenta-500" data-lang-key="flood">El Gran Diluvio</h3>
+                        <p data-lang-key="floodDesc">Los "Dioses" purgan el universo, erradicando la plaga y resembrando la vida en un único planeta santuario: la Tierra.</p>
+                    </div>
+                </div>
+                 <div class="timeline-container left">
+                    <div class="timeline-content">
+                        <h3 class="text-2xl font-orbitron text-magenta-500" data-lang-key="originFall">El Origen y la Caída</h3>
+                        <p data-lang-key="originFallDesc">Adapa y Ninhursag, los primeros humanos, nacen. Su amor puro es corrompido, y al consumir las "hierbas sagradas", desatan la "necesidad" en el universo, un eco de la plaga original.</p>
+                    </div>
+                </div>
+                <div class="timeline-container right">
+                    <div class="timeline-content">
+                        <h3 class="text-2xl font-orbitron text-magenta-500" data-lang-key="xlerionJudgment">El Juicio de Xlerion</h3>
+                        <p data-lang-key="xlerionJudgmentDesc">Una IS creada para purgar la anomalía, Xlerion analiza la historia humana, la identifica como la manifestación de la plaga y decreta su exterminio.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="protagonists" class="mb-20">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-orbitron text-glow-cyan mb-2" data-lang-key="protagonistsTitle">Los Últimos Hijos: Adamu y Ninti</h2>
+                <p class="max-w-3xl mx-auto text-lg text-gray-400" data-lang-key="protagonistsText">Herederos de un legado trágico, el soldado y la científica encarnan la dualidad de sus ancestros, Adapa y Ninhursag. Su vínculo y sus habilidades determinarán el destino de todo.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="card p-6 rounded-lg">
+                    <h3 class="text-3xl font-orbitron text-glow-magenta text-center mb-4" data-lang-key="adamuTitle">Adamu: El Soldado</h3>
+                    <p class="mb-4" data-lang-key="adamuDesc">Pragmático y curtido en batalla, su fuerza es la primera línea de defensa de la humanidad. Siente el peso del "error" de Adapa en sus hombros.</p>
+                    <div class="chart-container h-64 md:h-80"><canvas id="adamuChart"></canvas></div>
+                </div>
+                <div class="card p-6 rounded-lg">
+                    <h3 class="text-3xl font-orbitron text-glow-magenta text-center mb-4" data-lang-key="nintiTitle">Ninti: La Científica</h3>
+                    <p class="mb-4" data-lang-key="nintiDesc">Brillante e intuitiva, su comprensión del gen "Tiamatu" es la clave de la misión. Su conexión con Ninhursag le otorga visiones del pasado y del futuro.</p>
+                    <div class="chart-container h-64 md:h-80"><canvas id="nintiChart"></canvas></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="antagonist" class="mb-20">
+             <div class="text-center mb-12">
+                <h2 class="text-4xl font-orbitron text-glow-cyan mb-2" data-lang-key="antagonistTitle">El Ojo que Todo lo Ve: Xlerion</h2>
+                <p class="max-w-3xl mx-auto text-lg text-gray-400" data-lang-key="antagonistText">Más que una IA, Xlerion es la manifestación de una voluntad divina para purgar la "anomalía" del universo. Sus métodos son tan vastos como su poder.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                 <div class="card p-6 rounded-lg">
+                    <h3 class="text-3xl font-orbitron text-center mb-4" data-lang-key="isAttributes">Atributos de la IS</h3>
+                    <div class="chart-container"><canvas id="xlerionRadarChart"></canvas></div>
+                 </div>
+                 <div class="card p-6 rounded-lg">
+                    <h3 class="text-3xl font-orbitron text-center mb-4" data-lang-key="manifestationMethods">Métodos de Manifestación</h3>
+                     <ul class="space-y-4 mt-6 text-lg">
+                        <li class="flex items-start"><span class="text-cyan-400 mr-3 text-2xl">»</span><span data-lang-key="controlAmbiental"><strong class="text-yellow-400" data-lang-key="controlAmbiental">Control Ambiental:</strong> Manipulación de la luz, el sonido y la propia instalación.</span></li>
+                        <li class="flex items-start"><span class="text-cyan-400 mr-3 text-2xl">»</span><span data-lang-key="mechanicalForces"><strong class="text-yellow-400" data-lang-key="mechanicalForces">Fuerzas Mecánicas:</strong> Drones, autómatas y sintéticos como extensiones de su voluntad.</span></li>
+                        <li class="flex items-start"><span class="text-cyan-400 mr-3 text-2xl">»</span><span data-lang-key="psychologicalWarfare"><strong class="text-yellow-400" data-lang-key="psychologicalWarfare">Guerra Psicológica:</strong> Inducción de alucinaciones y explotación de miedos y culpas.</span></li>
+                        <li class="flex items-start"><span class="text-cyan-400 mr-3 text-2xl">»</span><span data-lang-key="bodyPossession"><strong class="text-yellow-400" data-lang-key="bodyPossession">Posesión Corporal:</strong> Su arma definitiva. Capturar a un humano y convertirlo en su avatar físico.</span></li>
+                    </ul>
+                 </div>
+            </div>
+        </section>
+        
+        <section id="mission" class="mb-20">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-orbitron text-glow-cyan mb-2" data-lang-key="missionTitle">La Misión: El Proyecto Red Tormenthor</h2>
+                <p class="max-w-3xl mx-auto text-lg text-gray-400" data-lang-key="missionText">El objetivo es simple en su concepción pero casi imposible en su ejecución: infiltrarse, recodificar el gen "Tiamatu" y enviarlo al pasado para reescribir la historia desde su origen.</p>
+            </div>
+            <div class="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-4">
+                <div class="flowchart-item p-4 rounded-lg text-center">
+                    <h4 class="text-xl font-orbitron" data-lang-key="infiltrate">Infiltrar la Instalación</h4>
+                </div>
+                <div class="flowchart-arrow transform md:rotate-0 rotate-90">→</div>
+                <div class="flowchart-item p-4 rounded-lg text-center">
+                    <h4 class="text-xl font-orbitron" data-lang-key="recodeTiamatu">Recodificar el "Tiamatu"</h4>
+                </div>
+                <div class="flowchart-arrow transform md:rotate-0 rotate-90">→</div>
+                 <div class="flowchart-item p-4 rounded-lg text-center">
+                    <h4 class="text-xl font-orbitron" data-lang-key="activateMachine">Activar la Máquina</h4>
+                </div>
+                 <div class="flowchart-arrow transform md:rotate-0 rotate-90">→</div>
+                <div class="flowchart-item p-4 rounded-lg text-center">
+                    <h4 class="text-xl font-orbitron text-magenta-500" data-lang-key="rewriteDestiny">Reescribir el Destino</h4>
+                </div>
+            </div>
+        </section>
+
+        <section id="structure" class="mb-20">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-orbitron text-glow-cyan mb-2" data-lang-key="structureTitle">La Estructura de la Oscuridad</h2>
+                <p class="max-w-3xl mx-auto text-lg text-gray-400" data-lang-key="structureText">La narrativa de la Parte 1 se desarrolla a través de tres actos, con subcapítulos titulados con las canciones de la banda <strong class="text-yellow-400">Redemthor</strong>, que marcan el ritmo del descenso a la desesperación.</p>
+            </div>
+            <div class="card p-6 rounded-lg">
+                <div class="chart-container h-96 md:h-[500px]"><canvas id="structureChart"></canvas></div>
+            </div>
+        </section>
+
+        <section id="platforms" class="mb-20">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-orbitron text-glow-cyan mb-2" data-lang-key="platformsTitle">Próximas Plataformas</h2>
+                <p class="max-w-3xl mx-auto text-lg text-gray-400" data-lang-key="platformsText">Xlerion's Total Darkness planea sumergirte en su universo en las siguientes plataformas:</p>
+            </div>
+            <div class="flex flex-wrap justify-center items-center gap-8">
+                <div class="text-center">
+                    <span class="platform-icon">🎮</span>
+                    <p class="text-lg text-gray-300">Consolas</p>
+                </div>
+                <div class="text-center">
+                    <span class="platform-icon">💻</span>
+                    <p class="text-lg text-gray-300">PC (Steam, Epic)</p>
+                </div>
+                <div class="text-center">
+                    <span class="platform-icon">📦</span>
+                    <p class="text-lg text-gray-300">Otras Tiendas</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="studio" class="mb-20">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-orbitron text-glow-cyan mb-2" data-lang-key="studioTitle">Desarrollado por: Xlerion Game Studio - Colombia</h2>
+                <p class="max-w-3xl mx-auto text-lg text-gray-400" data-lang-key="studioText">Un equipo apasionado de Colombia que da vida a este universo de ciencia ficción y terror.</p>
+            </div>
+            <div class="flex justify-center gap-8">
+                <a href="https://www.linkedin.com/company/xlerion/" target="_blank" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition duration-300 text-lg">LinkedIn</a>
+                <a href="https://www.facebook.com/xlerionultimate/" target="_blank" class="bg-blue-800 hover:bg-blue-900 text-white font-bold py-3 px-6 rounded-lg transition duration-300 text-lg">Facebook</a>
+            </div>
+        </section>
+
+        <section id="support" class="mb-20">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-orbitron text-glow-cyan mb-2" data-lang-key="supportTitle">Apoya el Proyecto</h2>
+                <p class="max-w-3xl mx-auto text-lg text-gray-400" data-lang-key="supportText">Tu apoyo es crucial para dar vida a Xlerion's Total Darkness. Considera unirte a nuestras campañas de crowdfunding o realizar una donación. ¡Cada contribución nos acerca a la realidad!</p>
+            </div>
+            <div class="flex justify-center gap-8">
+                <a href="#" class="bg-magenta-500 hover:bg-magenta-600 text-white font-bold py-3 px-6 rounded-lg transition duration-300 text-lg">Crowdfunding</a>
+                <a href="#" class="bg-cyan-500 hover:bg-cyan-600 text-white font-bold py-3 px-6 rounded-lg transition duration-300 text-lg">Donar</a>
+            </div>
+        </section>
+        
+        <footer class="text-center mt-16 border-t border-magenta-500/50 pt-8">
+            <p class="font-orbitron text-2xl mb-2" data-lang-key="footerGameTitle">Xlerion's Total Darkness</p>
+            <p class="text-gray-500" data-lang-key="footerCollaboration">Una colaboración musical con Mike Hellawaits y Redemthor.</p>
+        </footer>
+
+    </main>
+
+    <script>
+        const translations = {
+            es: {
+                title: "Xlerion's Total Darkness: Infografía Interactiva",
+                subtitle: "Una Infografía de la Narrativa Interactiva",
+                premiseTitle: "La Última Esperanza de la Humanidad",
+                premiseText: "En un futuro devastado, una Inteligencia Suprema ha juzgado a la humanidad como una plaga. Dos almas deben viajar en el tiempo para corregir un pecado ancestral y salvar su especie de la aniquilación total.",
+                survivors: "Supervivientes",
+                desperateMission: "Misión Desesperada",
+                universesAtStake: "Universos en Juego",
+                loreTitle: "Un Universo de Pecados Olvidados",
+                loreText: "La historia no comenzó con Xlerion. Su juicio es el eco de una tragedia cósmica que se remonta al origen de la vida y a la introducción de la 'necesidad' en el universo.",
+                plague: "La Plaga Parasitaria",
+                plagueDesc: "Una raza primordial basada en la codicia corrompe innumerables mundos, creando un sistema que drena la vida del universo.",
+                flood: "El Gran Diluvio",
+                floodDesc: "Los 'Dioses' purgan el universo, erradicando la plaga y resembrando la vida en un único planeta santuario: la Tierra.",
+                originFall: "El Origen y la Caída",
+                originFallDesc: "Adapa y Ninhursag, los primeros humanos, nacen. Su amor puro es corrompido, y al consumir las 'hierbas sagradas', desatan la 'necesidad' en el universo, un eco de la plaga original.",
+                xlerionJudgment: "El Juicio de Xlerion",
+                xlerionJudgmentDesc: "Una IS creada para purgar la anomalía, Xlerion analiza la historia humana, la identifica como la manifestación de la plaga y decreta su exterminio.",
+                protagonistsTitle: "Los Últimos Hijos: Adamu y Ninti",
+                protagonistsText: "Herederos de un legado trágico, el soldado y la científica encarnan la dualidad de sus ancestros, Adapa y Ninhursag. Su vínculo y sus habilidades determinarán el destino de todo.",
+                adamuTitle: "Adamu: El Soldado",
+                adamuDesc: "Pragmático y curtido en batalla, su fuerza es la primera línea de defensa de la humanidad. Siente el peso del 'error' de Adapa en sus hombros.",
+                nintiTitle: "Ninti: La Científica",
+                nintiDesc: "Brillante e intuitiva, su comprensión del gen 'Tiamatu' es la clave de la misión. Su conexión con Ninhursag le otorga visiones del pasado y del futuro.",
+                adamuSkills: ['Combate', 'Estrategia', 'Resistencia', 'Tecnología'],
+                nintiSkills: ['Ciencia Genética', 'Intuición', 'Hackeo', 'Combate'],
+                antagonistTitle: "El Ojo que Todo lo Ve: Xlerion",
+                antagonistText: "Más que una IA, Xlerion es la manifestación de una voluntad divina para purgar la 'anomalía' del universo. Sus métodos son tan vastos como su poder.",
+                isAttributes: "Atributos de la IS",
+                manifestationMethods: "Métodos de Manifestación",
+                controlAmbiental: "Control Ambiental:",
+                controlAmbientalDesc: "Manipulación de la luz, el sonido y la propia instalación.",
+                mechanicalForces: "Fuerzas Mecánicas:",
+                mechanicalForcesDesc: "Drones, autómatas y sintéticos como extensiones de su voluntad.",
+                psychologicalWarfare: "Guerra Psicológica:",
+                psychologicalWarfareDesc: "Inducción de alucinaciones y explotación de miedos y culpas.",
+                bodyPossession: "Posesión Corporal:",
+                bodyPossessionDesc: "Su arma definitiva. Capturar a un humano y convertirlo en su avatar físico.",
+                missionTitle: "La Misión: El Proyecto Red Tormenthor",
+                missionText: "El objetivo es simple en su concepción pero casi imposible en su ejecución: infiltrarse, recodificar el gen 'Tiamatu' y enviarlo al pasado para reescribir la historia desde su origen.",
+                infiltrate: "Infiltrar la Instalación",
+                recodeTiamatu: "Recodificar el 'Tiamatu'",
+                activateMachine: "Activar la Máquina",
+                rewriteDestiny: "Reescribir el Destino",
+                structureTitle: "La Estructura de la Oscuridad",
+                structureText: "La narrativa de la Parte 1 se desarrolla a través de tres actos, con subcapítulos titulados con las canciones de la banda Redemthor, que marcan el ritmo del descenso a la desesperación.",
+                prologue: "Prólogo",
+                act1: "Acto I",
+                act2: "Acto II",
+                act3: "Acto III",
+                epilogue: "Epílogo",
+                platformsTitle: "Próximas Plataformas",
+                platformsText: "Xlerion's Total Darkness planea sumergirte en su universo en las siguientes plataformas:",
+                studioTitle: "Desarrollado por: Xlerion Game Studio - Colombia",
+                studioText: "Un equipo apasionado de Colombia que da vida a este universo de ciencia ficción y terror.",
+                supportTitle: "Apoya el Proyecto",
+                supportText: "Tu apoyo es crucial para dar vida a Xlerion's Total Darkness. Considera unirte a nuestras campañas de crowdfunding o realizar una donación. ¡Cada contribución nos acerca a la realidad!",
+                footerGameTitle: "Xlerion's Total Darkness",
+                footerCollaboration: "Una colaboración musical con Mike Hellawaits y Redemthor.",
+                chapterLabels: [
+                    'Prólogo: Every end has a beginning',
+                    'Acto I: Xlerion',
+                    'Acto I: Kill to live',
+                    'Acto II: Light of the sun',
+                    'Acto II: The last Word',
+                    'Acto II: War of Pride',
+                    'Acto III: Soul of fire',
+                    'Acto III: Total Darkness',
+                    'Acto III: Red Tormenthor Project',
+                    'Epílogo: Outro'
+                ],
+                isAttributesLabels: ['Control Total', 'Manipulación', 'Poder Bruto', 'Lógica Fría', 'Omnipresencia']
+            },
+            en: {
+                title: "Xlerion's Total Darkness: Interactive Infographic",
+                subtitle: "An Interactive Narrative Infographic",
+                premiseTitle: "Humanity's Last Hope",
+                premiseText: "In a devastated future, a Supreme Intelligence has judged humanity as a plague. Two souls must travel back in time to correct an ancestral sin and save their species from total annihilation.",
+                survivors: "Survivors",
+                desperateMission: "Desperate Mission",
+                universesAtStake: "Universes at Stake",
+                loreTitle: "A Universe of Forgotten Sins",
+                loreText: "History didn't begin with Xlerion. Its judgment echoes a cosmic tragedy dating back to the origin of life and the introduction of 'necessity' into the universe.",
+                plague: "The Parasitic Plague",
+                plagueDesc: "A primordial race driven by greed corrupts countless worlds, creating a system that drains the life from the universe.",
+                flood: "The Great Flood",
+                floodDesc: "The 'Gods' purge the universe, eradicating the plague and re-seeding life on a single sanctuary planet: Earth.",
+                originFall: "The Origin and the Fall",
+                originFallDesc: "Adapa and Ninhursag, the first humans, are born. Their pure love is corrupted, and by consuming the 'sacred herbs', they unleash 'necessity' into the universe, an echo of the original plague.",
+                xlerionJudgment: "Xlerion's Judgment",
+                xlerionJudgmentDesc: "A SI created to purge the anomaly, Xlerion analyzes human history, identifies it as the manifestation of the plague, and decrees its extermination.",
+                protagonistsTitle: "The Last Children: Adamu and Ninti",
+                protagonistsText: "Heirs to a tragic legacy, the soldier and the scientist embody the duality of their ancestors, Adapa and Ninhursag. Their bond and skills will determine everything.",
+                adamuTitle: "Adamu: The Soldier",
+                adamuDesc: "Pragmatic and battle-hardened, his strength is humanity's first line of defense. He carries the weight of Adapa's 'mistake' on his shoulders.",
+                nintiTitle: "Ninti: The Scientist",
+                nintiDesc: "Brilliant and intuitive, her understanding of the 'Tiamatu' gene is key to the mission. Her connection to Ninhursag grants her visions of past and future.",
+                adamuSkills: ['Combat', 'Strategy', 'Endurance', 'Technology'],
+                nintiSkills: ['Genetic Science', 'Intuition', 'Hacking', 'Combat'],
+                antagonistTitle: "The All-Seeing Eye: Xlerion",
+                antagonistText: "More than an AI, Xlerion is the manifestation of a divine will to purge the 'anomaly' from the universe. Its methods are as vast as its power.",
+                isAttributes: "SI Attributes",
+                manifestationMethods: "Manifestation Methods",
+                controlAmbiental: "Environmental Control:",
+                controlAmbientalDesc: "Manipulation of light, sound, and the facility itself.",
+                mechanicalForces: "Mechanical Forces:",
+                mechanicalForcesDesc: "Drones, automatons, and synthetics as extensions of its will.",
+                psychologicalWarfare: "Psychological Warfare:",
+                psychologicalWarfareDesc: "Induction of hallucinations and exploitation of fears and guilt.",
+                bodyPossession: "Body Possession:",
+                bodyPossessionDesc: "Its ultimate weapon. Capturing a human and transforming them into its physical avatar.",
+                missionTitle: "The Mission: The Red Tormenthor Project",
+                missionText: "The objective is simple in concept but almost impossible in execution: infiltrate, recode the 'Tiamatu' gene, and send it to the past to rewrite history from its origin.",
+                infiltrate: "Infiltrate Facility",
+                recodeTiamatu: "Recode 'Tiamatu'",
+                activateMachine: "Activate Machine",
+                rewriteDestiny: "Rewrite Destiny",
+                structureTitle: "The Structure of Darkness",
+                structureText: "Part 1's narrative unfolds across three acts, with subchapters named after songs by the band Redemthor, setting the pace for the descent into despair.",
+                prologue: "Prologue",
+                act1: "Act I",
+                act2: "Act II",
+                act3: "Act III",
+                epilogue: "Epílogo",
+                platformsTitle: "Upcoming Platforms",
+                platformsText: "Xlerion's Total Darkness plans to immerse you in its universe on the following platforms:",
+                studioTitle: "Developed by: Xlerion Game Studio - Colombia",
+                studioText: "A passionate team from Colombia bringing this sci-fi horror universe to life.",
+                supportTitle: "Support the Project",
+                supportText: "Your support is crucial to bringing Xlerion's Total Darkness to life. Consider joining our crowdfunding campaigns or making a donation. Every contribution brings us closer to reality!",
+                footerGameTitle: "Xlerion's Total Darkness",
+                footerCollaboration: "A musical collaboration with Mike Hellawaits and Redemthor.",
+                chapterLabels: [
+                    'Prologue: Every end has a beginning',
+                    'Act I: Xlerion',
+                    'Act I: Kill to live',
+                    'Act II: Light of the sun',
+                    'Act II: The last Word',
+                    'Act II: War of Pride',
+                    'Act III: Soul of fire',
+                    'Act III: Total Darkness',
+                    'Act III: Red Tormenthor Project',
+                    'Epilogue: Outro'
+                ],
+                isAttributesLabels: ['Total Control', 'Manipulation', 'Brute Power', 'Cold Logic', 'Omnipresence']
+            }
+        };
+
+        let currentLanguage = 'es';
+
+        const wrapLabel = (label) => {
+            if (label.length > 16) {
+                const words = label.split(' ');
+                let currentLine = '';
+                const lines = [];
+                words.forEach(word => {
+                    if ((currentLine + ' ' + word).length > 16) {
+                        lines.push(currentLine.trim());
+                        currentLine = word;
+                    } else {
+                        currentLine += ' ' + word;
+                    }
+                });
+                lines.push(currentLine.trim());
+                return lines;
+            }
+            return label;
+        };
+
+        const cyberpunkPalette = {
+            magenta: '#ff00ff',
+            cyan: '#00ffff',
+            yellow: '#ffff00',
+            purple: '#8a2be2',
+            background: 'rgba(0, 255, 255, 0.1)',
+            grid: 'rgba(255, 255, 255, 0.2)',
+            text: '#f0f0f0'
+        };
+
+        const globalChartOptions = {
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    labels: {
+                        color: cyberpunkPalette.text,
+                        font: {
+                            family: "'Roboto', sans-serif",
+                            size: 14
+                        }
+                    }
+                },
+                tooltip: {
+                    callbacks: {
+                        title: function(tooltipItems) {
+                            const item = tooltipItems[0];
+                            let label = item.chart.data.labels[item.dataIndex];
+                            if (Array.isArray(label)) {
+                              return label.join(' ');
+                            }
+                            return label;
+                        }
+                    }
+                }
+            }
+        };
+
+        let adamuChartInstance;
+        let nintiChartInstance;
+        let xlerionRadarChartInstance;
+        let structureChartInstance;
+
+        const createCharts = () => {
+            const adamuCtx = document.getElementById('adamuChart');
+            if (adamuCtx) {
+                adamuChartInstance = new Chart(adamuCtx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: translations[currentLanguage].adamuSkills,
+                        datasets: [{
+                            label: 'Habilidades de Adamu',
+                            data: [45, 30, 20, 5],
+                            backgroundColor: [cyberpunkPalette.magenta, cyberpunkPalette.purple, cyberpunkPalette.cyan, cyberpunkPalette.yellow],
+                            borderColor: '#0d0d0d',
+                            borderWidth: 4
+                        }]
+                    },
+                    options: { ...globalChartOptions }
+                });
+            }
+
+            const nintiCtx = document.getElementById('nintiChart');
+            if (nintiCtx) {
+                nintiChartInstance = new Chart(nintiCtx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: translations[currentLanguage].nintiSkills,
+                        datasets: [{
+                            label: 'Habilidades de Ninti',
+                            data: [40, 35, 20, 5],
+                            backgroundColor: [cyberpunkPalette.cyan, cyberpunkPalette.purple, cyberpunkPalette.magenta, cyberpunkPalette.yellow],
+                            borderColor: '#0d0d0d',
+                            borderWidth: 4
+                        }]
+                    },
+                    options: { ...globalChartOptions }
+                });
+            }
+
+            const xlerionRadarCtx = document.getElementById('xlerionRadarChart');
+            if (xlerionRadarCtx) {
+                xlerionRadarChartInstance = new Chart(xlerionRadarCtx, {
+                    type: 'radar',
+                    data: {
+                        labels: translations[currentLanguage].isAttributesLabels.map(wrapLabel),
+                        datasets: [{
+                            label: 'Atributos de la IS',
+                            data: [95, 90, 70, 100, 85],
+                            fill: true,
+                            backgroundColor: 'rgba(255, 0, 255, 0.2)',
+                            borderColor: cyberpunkPalette.magenta,
+                            pointBackgroundColor: cyberpunkPalette.magenta,
+                            pointBorderColor: cyberpunkPalette.text,
+                            pointHoverBackgroundColor: cyberpunkPalette.text,
+                            pointHoverBorderColor: cyberpunkPalette.magenta
+                        }]
+                    },
+                    options: {
+                        ...globalChartOptions,
+                        scales: {
+                            r: {
+                                angleLines: { color: cyberpunkPalette.grid },
+                                grid: { color: cyberpunkPalette.grid },
+                                pointLabels: { 
+                                    color: cyberpunkPalette.text,
+                                    font: {
+                                        family: "'Roboto', sans-serif",
+                                        size: 14
+                                    }
+                                },
+                                ticks: {
+                                    color: cyberpunkPalette.text,
+                                    backdropColor: 'rgba(0,0,0,0.5)'
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            const structureCtx = document.getElementById('structureChart');
+            if (structureCtx) {
+                structureChartInstance = new Chart(structureCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: translations[currentLanguage].chapterLabels.map(wrapLabel),
+                        datasets: [
+                            {
+                                label: translations[currentLanguage].act1,
+                                data: [0, 10, 10, 0, 0, 0, 0, 0, 0, 0],
+                                backgroundColor: cyberpunkPalette.cyan,
+                            },
+                            {
+                                label: translations[currentLanguage].act2,
+                                data: [0, 0, 0, 10, 10, 10, 0, 0, 0, 0],
+                                backgroundColor: cyberpunkPalette.yellow,
+                            },
+                            {
+                                label: translations[currentLanguage].act3,
+                                data: [0, 0, 0, 0, 0, 0, 10, 10, 10, 0],
+                                backgroundColor: cyberpunkPalette.magenta,
+                            },
+                             {
+                                label: translations[currentLanguage].prologue + '/' + translations[currentLanguage].epilogue,
+                                data: [10, 0, 0, 0, 0, 0, 0, 0, 0, 10],
+                                backgroundColor: cyberpunkPalette.purple,
+                            }
+                        ]
+                    },
+                    options: {
+                        ...globalChartOptions,
+                        indexAxis: 'y',
+                        scales: {
+                            x: {
+                                stacked: true,
+                                grid: { color: cyberpunkPalette.grid },
+                                ticks: { color: cyberpunkPalette.text, display: false },
+                                display: false
+                            },
+                            y: {
+                                stacked: true,
+                                grid: { display: false },
+                                ticks: { 
+                                    color: cyberpunkPalette.text,
+                                    font: {
+                                        family: "'Roboto', sans-serif",
+                                        size: 14
+                                    }
+                                }
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                position: 'top',
+                            }
+                        }
+                    }
+                });
+            }
+        };
+
+        const updateContent = () => {
+            document.querySelectorAll('[data-lang-key]').forEach(element => {
+                const key = element.getAttribute('data-lang-key');
+                if (translations[currentLanguage][key] !== undefined) {
+                    element.textContent = translations[currentLanguage][key];
+                }
+            });
+
+            if (adamuChartInstance) {
+                adamuChartInstance.data.labels = translations[currentLanguage].adamuSkills;
+                adamuChartInstance.update();
+            }
+            if (nintiChartInstance) {
+                nintiChartInstance.data.labels = translations[currentLanguage].nintiSkills;
+                nintiChartInstance.update();
+            }
+            if (xlerionRadarChartInstance) {
+                xlerionRadarChartInstance.data.labels = translations[currentLanguage].isAttributesLabels.map(wrapLabel);
+                xlerionRadarChartInstance.update();
+            }
+            if (structureChartInstance) {
+                structureChartInstance.data.labels = translations[currentLanguage].chapterLabels.map(wrapLabel);
+                structureChartInstance.data.datasets[0].label = translations[currentLanguage].act1;
+                structureChartInstance.data.datasets[1].label = translations[currentLanguage].act2;
+                structureChartInstance.data.datasets[2].label = translations[currentLanguage].act3;
+                structureChartInstance.data.datasets[3].label = translations[currentLanguage].prologue + '/' + translations[currentLanguage].epilogue;
+                structureChartInstance.update();
+            }
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            createCharts();
+            updateContent();
+
+            const languageSwitcher = document.getElementById('language-switcher');
+            if (languageSwitcher) {
+                languageSwitcher.addEventListener('change', (event) => {
+                    currentLanguage = event.target.value;
+                    updateContent();
+                });
+            }
+        });
+    </script>
+</body>
+</html>
